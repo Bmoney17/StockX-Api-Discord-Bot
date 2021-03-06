@@ -4,3 +4,5 @@ Open source StockX bot in discord.js format so can be easily imported into a dis
 Gets info like release date, retial price, last sale size, style code, lowest ask / highest bid per size, Photo of item , colorway.
 
 Use it if you want.
+
+Feel free to dm me and questions or bugs to my discord Bmoney#9306.
