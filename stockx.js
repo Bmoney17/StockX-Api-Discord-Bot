@@ -30,7 +30,9 @@ module.exports = {
                 let url_key = Products[0].urlKey
         
                 response = await got('https://stockx.com/api/products/'+ url_key + '?includes=market');
+
                 const data1 = JSON.parse(response.body);
+                console.log(data1)
                 const { Product } = data1;
                 const sizePrices = Object.keys(Product.children).map(key => {
                     const Size = Product.children[key].shoeSize;
@@ -38,16 +40,115 @@ module.exports = {
                     const Bid = Product.children[key].market.highestBid;
                     return { name: '**Size:** '+Size , value: Ask+' | '+Bid , inline: true }
                 })
-                const StockXEmbed = new Discord.MessageEmbed()
-                .setColor('#0dd413')
-                .setTitle(Product.title)
-                .setURL('https://stockx.com/'+url_key)
-                .setThumbnail(Product.media.imageUrl)
-                .setDescription('Release Date: '+Product.traits[3].value+'\n'+'Colorway: '+Product.traits[1].value+'\nStyle Code: '+Product.traits[0].value+`\nLast Sale Size: `+Product.market.lastSaleSize+'\n Retial Price: ' +Product.traits[2].value+'\n')
-                .addFields(sizePrices)
-                .setTimestamp()
-                .setFooter('Made by Bmoney#9306')
-                message.channel.send(StockXEmbed);
+                console.log(Product.traits);
+
+                if(Product.contentGroup === 'sneakers') {
+                    const data1 = JSON.parse(response.body);
+                    const { Product } = data1;
+                    const sizePrices = Object.keys(Product.children).map(key => {
+                        const Size = Product.children[key].shoeSize;
+                        const Ask = Product.children[key].market.lowestAsk;
+                        const Bid = Product.children[key].market.highestBid;
+                        return { name: '**Size:** '+Size , value: Ask+' | '+Bid , inline: true }
+                    })
+
+                    const StockXEmbed = new Discord.MessageEmbed()
+                    .setColor('#0dd413')
+                    .setTitle(Product.title)
+                    .setURL('https://stockx.com/'+url_key)
+                    .setThumbnail(Product.media.imageUrl)
+                    .setDescription('Release Date: '+Product.traits[3].value+'\n'+'Style Code: '+Product.traits[0].value+'\n Retail Price: $' +Product.traits[2].value+'\n')
+                    .addFields(sizePrices)
+                    .setTimestamp()
+                    .setFooter('Made by Bmoney#9306')
+                    message.channel.send(StockXEmbed);
+                }
+                if(Product.contentGroup === 'streetwear-clothing') {
+                    const data1 = JSON.parse(response.body);
+                    const { Product } = data1;
+                    const sizePrices = Object.keys(Product.children).map(key => {
+                        const Size = Product.children[key].shoeSize;
+                        const Ask = Product.children[key].market.lowestAsk;
+                        const Bid = Product.children[key].market.highestBid;
+                        return { name: '**Size:** '+Size , value: Ask+' | '+Bid , inline: true }
+                    })
+
+                    const StockXEmbed = new Discord.MessageEmbed()
+                    .setColor('#0dd413')
+                    .setTitle(Product.title)
+                    .setURL('https://stockx.com/'+url_key)
+                    .setThumbnail(Product.media.imageUrl)
+                    .setDescription('Release Season: '+Product.traits[0].value+'\n'+'Retail Price: $'+Product.traits[3].value)
+                    .addFields(sizePrices)
+                    .setTimestamp()
+                    .setFooter('Made by Bmoney#9306')
+                    message.channel.send(StockXEmbed);
+                }
+                if(Product.contentGroup === 'watches') {
+                    const data1 = JSON.parse(response.body);
+                    const { Product } = data1;
+                    const sizePrices = Object.keys(Product.children).map(key => {
+                        const Size = Product.children[key].shoeSize;
+                        const Ask = Product.children[key].market.lowestAsk;
+                        const Bid = Product.children[key].market.highestBid;
+                        return { name: '**Price:** '+Size , value: Ask+' | '+Bid , inline: true }
+                    })
+                    
+                    const StockXEmbed = new Discord.MessageEmbed()
+                    .setColor('#0dd413')
+                    .setTitle(Product.title)
+                    .setURL('https://stockx.com/'+url_key)
+                    .setThumbnail(Product.media.imageUrl)
+                    .setDescription('Retail Price: $'+Product.traits[8].value+'\nReference Number: '+Product.traits[1].value)
+                    .addFields(sizePrices)
+                    .setTimestamp()
+                    .setFooter('Made by Bmoney#9306')
+                    message.channel.send(StockXEmbed);
+                }
+                if(Product.contentGroup === 'collectibles') {
+                    const data1 = JSON.parse(response.body);
+                    const { Product } = data1;
+                    const sizePrices = Object.keys(Product.children).map(key => {
+                        const Size = Product.children[key].shoeSize;
+                        const Ask = Product.children[key].market.lowestAsk;
+                        const Bid = Product.children[key].market.highestBid;
+                        return { name: '**Price:** '+Size , value: Ask+' | '+Bid , inline: true }
+                    })
+
+                    const StockXEmbed = new Discord.MessageEmbed()
+                    .setColor('#0dd413')
+                    .setTitle(Product.title)
+                    .setURL('https://stockx.com/'+url_key)
+                    .setThumbnail(Product.media.imageUrl)
+                    .addFields(sizePrices)
+                    .setTimestamp()
+                    .setFooter('Made by Bmoney#9306')
+                    message.channel.send(StockXEmbed);
+                }
+                if(Product.contentGroup === 'handbags') {
+                    const data1 = JSON.parse(response.body);
+                    const { Product } = data1;
+                    const sizePrices = Object.keys(Product.children).map(key => {
+                        const Size = Product.children[key].shoeSize;
+                        const Ask = Product.children[key].market.lowestAsk;
+                        const Bid = Product.children[key].market.highestBid;
+                        return { name: '**Price:**'+Size , value: Ask+' | '+Bid , inline: true }
+                    })
+
+                    const StockXEmbed = new Discord.MessageEmbed()
+                    .setColor('#0dd413')
+                    .setTitle(Product.title)
+                    .setURL('https://stockx.com/'+url_key)
+                    .setThumbnail(Product.media.imageUrl)
+                    .setDescription('Retail Price: $'+Product.traits[10].value)
+                    .addFields(sizePrices)
+                    .setTimestamp()
+                    .setFooter('Made by Bmoney#9306')
+                    message.channel.send(StockXEmbed);
+                }
+
+
+
             } catch (error) {
                 const ErrorEmbed = new Discord.MessageEmbed()
                 .setColor('#e30b25')
